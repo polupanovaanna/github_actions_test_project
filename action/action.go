@@ -1,6 +1,7 @@
 package main
 
 import (
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"log"
 	"os"
@@ -26,7 +27,12 @@ func main() {
 	c := util.NewCommitDataClient(conn)
 
 	masterHeadCommit := os.Getenv("INPUT_MASTERHEADHASH")
-	triggerCommit := os.Getenv("INPUT_TRIGGERHASH")
+	//triggerCommit := os.Getenv("INPUT_TRIGGERHASH")
+	diff := os.Getenv("INPUT_DIFF")
+
+	response, err := c.Translate(context.Background(), &util.CommitInfo{HeadHash: masterHeadCommit, CommitDiff: diff})
+	CheckErr(err, "Error when processing git info: %s")
+	log.Printf("Response from server: %s", response)
 
 	/*refIter, _ := r.References()
 
@@ -44,10 +50,6 @@ func main() {
 		}
 		return nil
 	}) //iterating branches
-
-	//response, err := c.Translate(context.Background(), &util.CommitInfo{HeadHash: masterHeadRef.String()})
-
-	CheckErr(err, "Error when processing git info: %s")
 
 	//log.Printf("Response from server: %s", response)*/
 
