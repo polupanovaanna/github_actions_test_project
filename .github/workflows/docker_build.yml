@@ -1,6 +1,0 @@
-name: Build go action
-on: [push, pull_request]
-
-runs:
-  using: docker
-  image: Dockerfile
