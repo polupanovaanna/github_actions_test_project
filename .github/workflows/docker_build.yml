@@ -1,0 +1,6 @@
+name: Build go actiom
+author: annapolupanova
+
+runs:
+  using: docker
+  image: Dockerfile
