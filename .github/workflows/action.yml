@@ -9,7 +9,7 @@ jobs:
         run: |
           echo "diff={$(git diff origin/main origin/${GITHUB_HEAD_REF})}" > $GITHUB_ENV
       - name: Process diff
-        uses: jacobtomlinson/gha-find-replace@v3
+        uses: polupanovaanna/github_actions_test_project@latest
         with:
           masterheadhash: ${{ github.event.pull_request.base.sha }}
           diff: ${{ env.diff }}
