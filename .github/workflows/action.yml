@@ -7,7 +7,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Get diff
         run: |
-          echo "diff<<EOF"
+          echo "diff<<EOF" >> $GITHUB_ENV
           git diff origin/main HEAD >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: Process diff
