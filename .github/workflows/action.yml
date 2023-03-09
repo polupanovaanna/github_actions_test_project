@@ -7,8 +7,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Get diff
         run: |
-          echo ${GITHUB_HEAD_REF}
-          echo "diff={$(git diff main ${GITHUB_HEAD_REF})}" > $GITHUB_ENV
+          echo "diff={$(git diff ${GITHUB_BASE_REF} ${GITHUB_HEAD_REF})}" > $GITHUB_ENV
       - name: Process diff
         uses: polupanovaanna/parse_repo_docker_action@master
         with:
