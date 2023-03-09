@@ -4,10 +4,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v1
       - name: Get diff
         run: |
-          echo "diff={$(git diff origin/main origin/${GITHUB_HEAD_REF})}" > $GITHUB_ENV
+          echo "diff={$(git diff origin/main HEAD}" > $GITHUB_ENV
       - name: Process diff
         uses: polupanovaanna/github_actions_test_project@latest
         with:
