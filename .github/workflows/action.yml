@@ -1,5 +1,5 @@
-name: Test Action
-on: [push, pull_request]
+name: Check pull request action
+on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
