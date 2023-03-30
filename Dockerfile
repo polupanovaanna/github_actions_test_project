@@ -1,6 +1,8 @@
-FROM ubuntu:focal-20211006
+FROM golang:1.18 as builder
 
 RUN apt update -y
+
+RUN apt install -y git
 
 RUN apt install -y apt-transport-https curl gnupg
 
