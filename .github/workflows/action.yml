@@ -1,5 +1,6 @@
 name: Check pull request action
 on: [pull_request]
+description: "Sending check request when crating pull request to run tests"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,6 +11,9 @@ jobs:
           echo "diff<<EOF" >> $GITHUB_ENV
           git diff origin/main HEAD >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
+          echo "targets<<EOF" >> $GITHUB_ENV
+          echo "a.go" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
       - name: Process diff
         uses: polupanovaanna/parse_repo_docker_action@master
         with:
@@ -17,3 +21,4 @@ jobs:
           diff: ${{ env.diff }}
           host: ${{ secrets.SERVER_URL }}
           command: "bazel build //a_app:a_build"
+          targets: ${{ env.targets }}
