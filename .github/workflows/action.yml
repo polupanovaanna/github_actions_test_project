@@ -10,6 +10,9 @@ jobs:
           echo "diff<<EOF" >> $GITHUB_ENV
           git diff origin/main HEAD >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
+      - name: Get affected targets
+        run: |
+          bazel build //:bazel-diff
           echo "targets<<EOF" >> $GITHUB_ENV
           hashMaster=$(git rev-parse origin/main HEAD | awk 'NR==1')
           hashBranch=$(git rev-parse origin/main HEAD | awk 'NR==2')
@@ -19,7 +22,7 @@ jobs:
           bazel-bin/bazel-diff generate-hashes -w ~/github_actions_test_project branch_hash.txt
           bazel-bin/bazel-diff get-impacted-targets -sh master_hash.txt -fh branch_hash.txt >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-      - name: Process diff
+      - name: Process info
         uses: polupanovaanna/parse_repo_docker_action@master
         with:
           headHash: ${{ github.event.pull_request.base.sha }}
