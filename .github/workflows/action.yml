@@ -1,6 +1,5 @@
 name: Check pull request action
 on: [pull_request]
-description: "Sending check request when crating pull request to run tests"
 jobs:
   build:
     runs-on: ubuntu-latest
