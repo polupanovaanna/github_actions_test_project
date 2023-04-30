@@ -17,9 +17,9 @@ jobs:
           hashMaster=$(git rev-parse origin/main HEAD | awk 'NR==1')
           hashBranch=$(git rev-parse origin/main HEAD | awk 'NR==2')
           git checkout $hashMaster --quiet
-          bazel-bin/bazel-diff generate-hashes -w ~/github_actions_test_project master_hash.txt
+          bazel-bin/bazel-diff generate-hashes -w ${{ github.workspace }} master_hash.txt
           git checkout $hashBranch --quiet
-          bazel-bin/bazel-diff generate-hashes -w ~/github_actions_test_project branch_hash.txt
+          bazel-bin/bazel-diff generate-hashes -w ${{ github.workspace }} branch_hash.txt
           bazel-bin/bazel-diff get-impacted-targets -sh master_hash.txt -fh branch_hash.txt >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: Process info
