@@ -1,4 +1,4 @@
-package c_app
+package main
 
 import "fmt"
 
