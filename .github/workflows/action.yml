@@ -28,5 +28,5 @@ jobs:
           headHash: ${{ github.event.pull_request.base.sha }}
           diff: ${{ env.diff }}
           host: ${{ secrets.SERVER_URL }}
-          command: "bazel build //a_app:a_build"
+          command: "bazel build //a_app:a_build //b_app:b_build //c_app:c_build"
           targets: ${{ env.targets }}
